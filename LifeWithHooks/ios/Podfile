@@ -38,6 +38,8 @@ target 'LifeWithHooks' do
 
   pod 'RNScreens', :path => '../node_modules/react-native-screens'
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'LifeWithHooksTests' do
     inherit! :search_paths
     # Pods for testing
