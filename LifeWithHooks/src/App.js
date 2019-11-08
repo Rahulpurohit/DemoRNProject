@@ -1,6 +1,5 @@
-import React, {Component} from 'react';
+import React, {useEffect} from 'react';
 
-import {View} from 'react-native';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 
@@ -22,32 +21,30 @@ function getActiveRouteName(navigationState) {
   return route.routeName;
 }
 
-class App extends Component {
-  componentDidMount() {
+function App(props) {
+  useEffect(() => {
     if (__DEV__) {
       console.disableYellowBox = true;
     }
-  }
+  });
 
-  render() {
-    return (
-      <Provider store={store}>
-        <PersistGate loading={<Splash />} persistor={persistor}>
-          <AppContainer
-            onNavigationStateChange={(prevState, currentState) => {
-              const currentScreen = getActiveRouteName(currentState);
-              const prevScreen = getActiveRouteName(prevState);
-              // if (prevScreen !== currentScreen) {
-              // 	// the line below uses the  Analytics tracker
-              // 	// change the tracker here to use other Mobile analytics SDK.
-              // 	tracker.trackScreenView(currentScreen);
-              // }
-            }}
-          />
-        </PersistGate>
-      </Provider>
-    );
-  }
+  return (
+    <Provider store={store}>
+      <PersistGate loading={<Splash />} persistor={persistor}>
+        <AppContainer
+          onNavigationStateChange={(prevState, currentState) => {
+            const currentScreen = getActiveRouteName(currentState);
+            const prevScreen = getActiveRouteName(prevState);
+            // if (prevScreen !== currentScreen) {
+            // 	// the line below uses the  Analytics tracker
+            // 	// change the tracker here to use other Mobile analytics SDK.
+            // 	tracker.trackScreenView(currentScreen);
+            // }
+          }}
+        />
+      </PersistGate>
+    </Provider>
+  );
 }
 
 export default MyApp = App;
