@@ -225,6 +225,8 @@ PODS:
     - React
   - RNScreens (2.0.0-alpha.7):
     - React
+  - RNVectorIcons (6.6.0):
+    - React
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -259,6 +261,7 @@ DEPENDENCIES:
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 EXTERNAL SOURCES:
@@ -318,6 +321,8 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native-reanimated
   RNScreens:
     :path: ../node_modules/react-native-screens
+  RNVectorIcons:
+    :path: ../node_modules/react-native-vector-icons
   Yoga:
     :path: ../node_modules/react-native/ReactCommon/yoga
 
@@ -351,8 +356,9 @@ SPEC CHECKSUMS:
   RNGestureHandler: 311e3b1cef021a7c9ef31e97e7dc31970cc6288d
   RNReanimated: 438b025d37de68a20188ead653ad5a5050b65990
   RNScreens: cbad3ccd2798bd19cc9ca5070e95e31c950b50ac
+  RNVectorIcons: 66af4d5c8ff4f584c7b7cd9c4b0780920f27fce2
   Yoga: 6af72bedeaea291a3a3717772d6d41836f23a1b9
 
-PODFILE CHECKSUM: 24839d8f27871c341bde0150222e673e209cf84a
+PODFILE CHECKSUM: 26cb4c66e8a81f64728deeaca244b2f8210a82cb
 
 COCOAPODS: 1.4.0

@@ -38,7 +38,7 @@ export default connect(
       validationReducer: state.validationReducer,
       userReducer: state.UserReducer,
       isLogin: state.UserReducer.data ? !!state.UserReducer.data.token : false,
-      error: state.UserReducer.data ? state.UserReducer.data.error : null,
+      error: state.UserReducer.error ? state.UserReducer.error.message : null,
     };
   },
   mapDispatchToProps,

@@ -1,13 +1,13 @@
 'use strict';
 
 const USER = {
-	LOGIN: '/login'
+  LOGIN: '/bins/l33n4',
 };
 const LIST = {
-	LIST: '/unkowen'
+  LIST: '/unkowen',
 };
 
 module.exports = {
-	USER,
-	LIST
+  USER,
+  LIST,
 };

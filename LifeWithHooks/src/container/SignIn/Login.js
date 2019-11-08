@@ -58,6 +58,7 @@ export default class Login extends Component {
                   <View style={styles.Username}>
                     <EvilIconsIcon name="user" style={styles.icon2} />
                     <TextInput
+                      placeholder="email"
                       placeholderTextColor="rgba(255,255,255,1)"
                       secureTextEntry={false}
                       style={styles.UsernameInput}
@@ -68,6 +69,7 @@ export default class Login extends Component {
                       validation={validations.email}
                       labelTitle={'Email'}
                       placeHolder={'Email'}
+                      keyboardType={'email-address'}
                       {...email}
                     />
                   </View>
@@ -76,7 +78,6 @@ export default class Login extends Component {
                     <TextInput
                       placeholder="Password"
                       placeholderTextColor="rgba(255,255,255,1)"
-                      secureTextEntry={false}
                       style={styles.PasswordInput}
                       name="password"
                       onChange={onChange}
@@ -84,9 +85,9 @@ export default class Login extends Component {
                       validateOn="blur"
                       validation={validations.password}
                       labelTitle={'Password'}
-                      placeHolder={'password'}
                       {...password}
                       secureTextEntry={true}
+                      keyboardType={'email-address'}
                     />
                   </View>
                 </View>
@@ -101,7 +102,9 @@ export default class Login extends Component {
                 </TouchableOpacity>
               </View>
             </View>
+
             <View style={styles.LogoColumnFiller} />
+
             <View style={styles.FooterTexts}>
               <TouchableOpacity
                 onPress={() => this.props.navigation.navigate('SignUp')}
@@ -138,7 +141,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   Logo: {
-    width: 102,
+    width: '100%',
     height: 111,
     alignSelf: 'center',
   },
@@ -146,15 +149,19 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   text3: {
+    flex: 1,
     color: 'rgba(255,255,255,1)',
     fontSize: 40,
     marginBottom: 4,
   },
   rect7: {
-    height: 8,
+    height: 3,
     backgroundColor: '#25cdec',
   },
   text3Column: {
+    width: '100%',
+    flex: 1,
+
     marginBottom: 6,
     marginLeft: 2,
     marginRight: 3,
@@ -218,7 +225,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   LogoColumn: {
-    marginTop: 130,
+    marginTop: 90,
     marginLeft: 41,
     marginRight: 41,
   },
@@ -236,6 +243,9 @@ const styles = StyleSheet.create({
     width: 104,
     height: 14,
     alignSelf: 'flex-end',
+  },
+  ErrorContainer: {
+    flex: 1,
   },
   CreateAccountFiller: {
     flex: 1,

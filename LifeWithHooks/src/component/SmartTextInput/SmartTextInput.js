@@ -43,6 +43,7 @@ export class SmartTextInput extends Component {
           onChange={this.handleChange.bind(this)}
           onSubmitEditing={this.handleBlur.bind(this)}
           underlineColorAndroid={'transparent'}
+          keyboardAppearance={'light'}
         />
         {hasErrors &&
           errors.map(e => <Text style={styles.errorMessage}>{e}</Text>)}
