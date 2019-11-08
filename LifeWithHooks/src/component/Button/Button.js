@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 import getStyle from './style';
 export function Button(props) {
