@@ -9,7 +9,6 @@ import {
   ScrollView,
 } from 'react-native';
 import EvilIconsIcon from 'react-native-vector-icons/EvilIcons';
-import {validations} from './index';
 import {SmartTextInput as TextInput} from '../../component/SmartTextInput/SmartTextInput';
 
 export default function Login(props) {
@@ -17,7 +16,12 @@ export default function Login(props) {
     props.isLogin && props.navigation.navigate('App');
   });
 
-  handleSubmit = values => {
+  const validations = {
+    email: 'email',
+    password: ['minLength:6', 'doesNotMatch:password'],
+  };
+
+  const handleSubmit = values => {
     return new Promise(resolve =>
       setTimeout(() => {
         resolve();
@@ -84,7 +88,7 @@ export default function Login(props) {
                 <Text style={styles.errorText}>{error}</Text>
 
                 <TouchableOpacity
-                  onPress={onSubmit(this.handleSubmit.bind(this))}
+                  onPress={onSubmit(validations, handleSubmit)}
                   style={styles.button}>
                   <Text style={styles.text2}>Get Started</Text>
                 </TouchableOpacity>

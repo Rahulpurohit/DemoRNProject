@@ -4,11 +4,6 @@ import {changeValue, validate, submit} from './actions/validationActions';
 import {getUser} from '../../actions/UserActions';
 import Login from './Login';
 
-export const validations = {
-  email: 'email',
-  password: ['minLength:6', 'doesNotMatch:password'],
-};
-
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     // We'll have each field call the `onChange` handler with its own
@@ -24,7 +19,7 @@ function mapDispatchToProps(dispatch, ownProps) {
 
     // This is a curried function that takes the final submit function that
     // the component wants to call _after_ the fields have been validated
-    onSubmit: handler => e => {
+    onSubmit: (validations, handler) => e => {
       return dispatch(submit(validations, handler));
     },
     getUser: obj => dispatch(getUser({obj})),

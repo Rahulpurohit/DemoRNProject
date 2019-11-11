@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, ImageBackground} from 'react-native';
-export function Splash() {
+export function Splash(props) {
   return (
     <ImageBackground
       style={styles.rect}
@@ -15,10 +15,10 @@ const styles = StyleSheet.create({
     opacity: 0.69,
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   textStyle: {
     fontSize: 24,
-    color: 'white'
-  }
+    color: 'white',
+  },
 });
