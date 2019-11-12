@@ -184,6 +184,7 @@ dependencies {
     implementation project(':react-native-reanimated')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
+api 'com.otaliastudios:cameraview:2.4.0'
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";

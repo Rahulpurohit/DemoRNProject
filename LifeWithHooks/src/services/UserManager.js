@@ -1,10 +1,10 @@
 'use strict';
 
 import APIManager from './APIManager';
-import { USER } from './EndPoints';
+import {USER} from './EndPoints';
 
 export function loginUser(params) {
-	return APIManager.postHandle(USER.LOGIN, params.obj);
+  return APIManager.getHandle(USER.LOGIN, params.obj);
 }
 
 // export function registerUser(params) {

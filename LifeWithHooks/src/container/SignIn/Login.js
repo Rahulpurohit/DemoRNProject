@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -6,45 +6,38 @@ import {
   Text,
   TouchableOpacity,
   StatusBar,
+  ScrollView,
 } from 'react-native';
 import EvilIconsIcon from 'react-native-vector-icons/EvilIcons';
-import {validations} from './index';
 import {SmartTextInput as TextInput} from '../../component/SmartTextInput/SmartTextInput';
 
-export default class Login extends Component {
-  constructor(props) {
-    super(props);
-    this._bootstrapAsync();
-  }
+export default function Login(props) {
+  useEffect(() => {
+    props.isLogin && props.navigation.navigate('App');
+  });
 
-  componentDidUpdate() {
-    this.props.isLogin && this.props.navigation.navigate('App');
-  }
+  const validations = {
+    email: 'email',
+    password: ['minLength:6', 'doesNotMatch:password'],
+  };
 
-  _bootstrapAsync() {
-    this.props.isLogin && this.props.navigation.navigate('App');
-  }
-
-  handleSubmit(values) {
+  const handleSubmit = values => {
     return new Promise(resolve =>
       setTimeout(() => {
         resolve();
-        this.setState({data: values});
-        this.props.getUser(values);
+        props.getUser(values);
       }, 500),
     );
-  }
-
-  render() {
-    const {onChange, onSubmit, onValidate, error} = this.props;
-    const {email, password} = this.props.validationReducer.fields;
-
-    return (
-      <View style={styles.root}>
-        <View style={styles.Background}>
-          <ImageBackground
-            style={styles.rect}
-            source={require('../../assets/images/Gradient_LZGIVfZ.png')}>
+  };
+  const {onChange, onSubmit, onValidate, error} = props;
+  const {email, password} = props.validationReducer.fields;
+  return (
+    <View style={styles.root}>
+      <View style={styles.Background}>
+        <ImageBackground
+          style={styles.rect}
+          source={require('../../assets/images/Gradient_LZGIVfZ.png')}>
+          <ScrollView>
             <View style={styles.LogoColumn}>
               <View style={styles.Logo}>
                 <View style={styles.endWrapperFiller} />
@@ -58,6 +51,7 @@ export default class Login extends Component {
                   <View style={styles.Username}>
                     <EvilIconsIcon name="user" style={styles.icon2} />
                     <TextInput
+                      placeholder="email"
                       placeholderTextColor="rgba(255,255,255,1)"
                       secureTextEntry={false}
                       style={styles.UsernameInput}
@@ -68,6 +62,7 @@ export default class Login extends Component {
                       validation={validations.email}
                       labelTitle={'Email'}
                       placeHolder={'Email'}
+                      keyboardType={'email-address'}
                       {...email}
                     />
                   </View>
@@ -76,7 +71,6 @@ export default class Login extends Component {
                     <TextInput
                       placeholder="Password"
                       placeholderTextColor="rgba(255,255,255,1)"
-                      secureTextEntry={false}
                       style={styles.PasswordInput}
                       name="password"
                       onChange={onChange}
@@ -84,51 +78,51 @@ export default class Login extends Component {
                       validateOn="blur"
                       validation={validations.password}
                       labelTitle={'Password'}
-                      placeHolder={'password'}
                       {...password}
                       secureTextEntry={true}
+                      keyboardType={'email-address'}
                     />
                   </View>
                 </View>
 
                 <Text style={styles.errorText}>{error}</Text>
 
-                <View style={styles.UsernameColumnFiller} />
                 <TouchableOpacity
-                  onPress={onSubmit(this.handleSubmit.bind(this))}
+                  onPress={onSubmit(validations, handleSubmit)}
                   style={styles.button}>
                   <Text style={styles.text2}>Get Started</Text>
                 </TouchableOpacity>
               </View>
             </View>
+
             <View style={styles.LogoColumnFiller} />
-            <View style={styles.FooterTexts}>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate('SignUp')}
-                style={styles.button2}>
-                <View style={styles.CreateAccountFiller} />
-                <Text style={styles.CreateAccount}>Create Account</Text>
-              </TouchableOpacity>
-              <View style={styles.button2Filler} />
-              <Text style={styles.NeedHelp}>Need Help?</Text>
-            </View>
-          </ImageBackground>
-        </View>
-        <StatusBar
-          animated={true}
-          barStyle="dark-content"
-          hidden={false}
-          backgroundColor="rgba(0,0,0,0)"
-        />
+          </ScrollView>
+
+          <View style={styles.FooterTexts}>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate('SignUp')}
+              style={styles.button2}>
+              <View style={styles.CreateAccountFiller} />
+              <Text style={styles.CreateAccount}>Create Account</Text>
+            </TouchableOpacity>
+            <View style={styles.button2Filler} />
+            <Text style={styles.NeedHelp}>Need Help?</Text>
+          </View>
+        </ImageBackground>
       </View>
-    );
-  }
+      <StatusBar
+        animated={true}
+        barStyle="dark-content"
+        hidden={false}
+        backgroundColor="rgba(0,0,0,0)"
+      />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: 'rgb(255,255,255)',
   },
   Background: {
     flex: 1,
@@ -138,7 +132,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   Logo: {
-    width: 102,
+    width: '100%',
     height: 111,
     alignSelf: 'center',
   },
@@ -146,21 +140,24 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   text3: {
+    flex: 1,
     color: 'rgba(255,255,255,1)',
     fontSize: 40,
     marginBottom: 4,
   },
   rect7: {
-    height: 8,
+    height: 3,
     backgroundColor: '#25cdec',
   },
   text3Column: {
+    width: '100%',
+    flex: 1,
+
     marginBottom: 6,
     marginLeft: 2,
     marginRight: 3,
   },
   Form: {
-    height: 230,
     marginTop: 59,
   },
   Username: {
@@ -203,7 +200,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    height: 59,
+    minHeight: 59,
     backgroundColor: 'rgba(31,178,204,1)',
     borderRadius: 5,
     justifyContent: 'center',
@@ -216,9 +213,10 @@ const styles = StyleSheet.create({
   text2: {
     color: 'rgba(255,255,255,1)',
     alignSelf: 'center',
+    justifyContent: 'center',
   },
   LogoColumn: {
-    marginTop: 130,
+    marginTop: 90,
     marginLeft: 41,
     marginRight: 41,
   },
@@ -236,6 +234,9 @@ const styles = StyleSheet.create({
     width: 104,
     height: 14,
     alignSelf: 'flex-end',
+  },
+  ErrorContainer: {
+    flex: 1,
   },
   CreateAccountFiller: {
     flex: 1,
