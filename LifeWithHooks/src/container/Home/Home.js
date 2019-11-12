@@ -1,32 +1,57 @@
-import React, {useEffect, useState} from 'react';
-import {FlatList, SafeAreaView} from 'react-native';
-import colors from '../../color';
-import Row from './Row/Row';
+/* eslint-disable react-native/no-inline-styles */
+
+import React, {useEffect, useState, useRef} from 'react';
+import {
+  FlatList,
+  SafeAreaView,
+  ImageBackground,
+  View,
+  findNodeHandle,
+  UIManager,
+  TouchableOpacity,
+} from 'react-native';
+import RowSequence from './Row/RowSequence';
 import {Spinner} from 'native-base';
+import colors from '../../color';
+import Header from '../../component/Header/Header';
+import ImageEditor from '../ImageEditor/ImageEditor';
 
 export function Home(props) {
-  const [page, setPage] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   useEffect(() => {
-    props.getList({page: page});
+    props.getList();
   }, []);
 
   const {isFetching} = props.list;
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: colors.black}}>
-      {props.list.data && (
-        <FlatList
-          data={props.list.data.data ? props.list.data.data : []}
-          renderItem={({item, index}) => <Row {...item} index={index} />}
-          onEndReached={({distanceFromEnd}) => {
-            if (distanceFromEnd >= 0) {
-              const total_pages = props.list ? props.list.data.total_pages : 1;
-              if (page < total_pages) setPage({page: page + 1});
+    <ImageBackground
+      style={{flex: 1}}
+      source={require('../../assets/images/Gradient_LZGIVfZ.png')}>
+      <Header />
+      <SafeAreaView>
+        {props.list.data && (
+          <FlatList
+            data={
+              props.list.data.ccm_sequences ? props.list.data.ccm_sequences : []
             }
-          }}
-          onEndReachedThreshold={0.8}
-        />
-      )}
-      {isFetching && <Spinner />}
-    </SafeAreaView>
+            style={{backgroundColor: colors.yet_another_color}}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            renderItem={({item, index}) => (
+              <RowSequence
+                {...item}
+                index={index}
+                onPress={() => {
+                  setSelectedIndex(index);
+                }}
+                selectedIndex={selectedIndex}
+              />
+            )}
+          />
+        )}
+        <ImageEditor />
+        {isFetching && <Spinner />}
+      </SafeAreaView>
+    </ImageBackground>
   );
 }

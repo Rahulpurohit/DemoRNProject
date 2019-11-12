@@ -123,7 +123,6 @@ export default function Login(props) {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: 'rgb(255,255,255)',
   },
   Background: {
     flex: 1,

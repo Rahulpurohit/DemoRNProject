@@ -12,12 +12,12 @@ import getList from '../../../services/ListManager';
 function* workerList({action}) {
   try {
     const response = yield call(getList, action);
-    const state = yield select(state => state);
-    if (state.listReducer.data) {
-      response.data.data = response.data.data.concat(
-        state.listReducer.data.data,
-      );
-    }
+    // const state = yield select(state => state);
+    // if (state.listReducer.data) {
+    //   response.data.data = response.data.data.concat(
+    //     state.listReducer.data.data,
+    //   );
+    // }
     yield put(getListSuccess(response.data));
   } catch (e) {
     console.error(e);

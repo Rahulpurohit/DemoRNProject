@@ -4,7 +4,7 @@ const USER = {
   LOGIN: '/bins/l33n4',
 };
 const LIST = {
-  LIST: '/api/unkowen',
+  LIST: '/bins/s234w',
 };
 
 module.exports = {

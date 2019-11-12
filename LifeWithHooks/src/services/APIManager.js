@@ -6,20 +6,9 @@ import axios from 'axios';
 type objType = PropTypes.func;
 
 export default class APIManager {
-  static API = axios.create({baseURL: 'https://reqres.in/'});
+  static API = axios.create({baseURL: 'https://api.myjson.com'});
 
   static handleResponse(promise: Promise, obj: objType): Promise {
-    // TESTING PURPOSE ONLY
-    // if (obj) {
-    // 	promise
-    // 		.then(function(response) {
-    // 			return obj(response.data, null);
-    // 		})
-    // 		.catch(function(error) {
-    // 			return obj(null, error);
-    // 		});
-    // 	return null;
-    // }
     return promise;
   }
 
